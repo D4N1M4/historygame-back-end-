@@ -12,6 +12,7 @@ public class JogoDTO {
     private String nome;
     private String resumo;
     private String capa;
+    private String modoJogo;
     private LocalDate dataLancamento;
     private List<GeneroDTO> generos;
 }

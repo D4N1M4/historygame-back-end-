@@ -9,9 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "generos")
+@Getter
+@Setter
 public class Genero {
 
     @Id
@@ -20,7 +24,9 @@ public class Genero {
 
     private String nome;
 
-    
+    @ManyToMany(mappedBy = "generos")
+    private List<Jogo> jogos = new ArrayList<>();
+
     public Genero(String nome) {
         this.nome = nome;
     }
@@ -28,23 +34,5 @@ public class Genero {
     public Genero() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @ManyToMany(mappedBy = "generos")
-    private List<Jogo> jogos = new ArrayList<>();
 }
 

@@ -16,6 +16,7 @@ public class JogoMapper {
         dto.setNome(jogo.getNome());
         dto.setResumo(jogo.getResumo());
         dto.setCapa(jogo.getCapa());
+        dto.setModoJogo(jogo.getModoJogo());
         dto.setDataLancamento(jogo.getDataLancamento());
 
         dto.setGeneros(jogo.getGeneros().stream()
@@ -25,22 +26,21 @@ public class JogoMapper {
         return dto;
     }
 
-    public Jogo toEntity(JogoDTO dto) {
-        Jogo jogo = new Jogo();
-        jogo.setId(dto.getId());
-        jogo.setNome(dto.getNome());
-        jogo.setResumo(dto.getResumo());
-        jogo.setCapa(dto.getCapa());
-        jogo.setDataLancamento(dto.getDataLancamento());
+public Jogo toEntity(JogoDTO dto) {
+    Jogo jogo = new Jogo();
+    jogo.setId(dto.getId());
+    jogo.setNome(dto.getNome());
+    jogo.setResumo(dto.getResumo());
+    jogo.setCapa(dto.getCapa());
+    jogo.setModoJogo(dto.getModoJogo());
+    jogo.setDataLancamento(dto.getDataLancamento());
 
-        if (dto.getGeneros() != null) {
-            jogo.setGeneros(dto.getGeneros().stream()
-                .map(this::toGenero)
-                .collect(Collectors.toList()));
-        }
+    jogo.setGeneros(dto.getGeneros().stream()
+         .map(this::toGenero)
+         .collect(Collectors.toList()));
+    return jogo;
+}
 
-        return jogo;
-    }
 
     public GeneroDTO toGeneroDTO(Genero genero) {
         GeneroDTO dto = new GeneroDTO();
