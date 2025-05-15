@@ -48,5 +48,12 @@ public class JogoController {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/genero/{nomeGenero}")
+    public ResponseEntity<List<JogoDTO>> listarPorGenero(@PathVariable String nomeGenero) {
+        return ResponseEntity.ok(service.listarPorGenero(nomeGenero));
+    }
+
+
 }
 

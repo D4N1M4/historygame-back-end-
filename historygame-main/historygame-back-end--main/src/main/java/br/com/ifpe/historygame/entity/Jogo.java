@@ -1,58 +1,44 @@
 package br.com.ifpe.historygame.entity;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Table(name="jogo")
+@Getter
+@Setter
 public class Jogo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", nullable=false, unique=true)
     private Long id;
 
+    @Column(name="nome", nullable=false)
     private String nome;
-    private String genero;
+
+    @Column(name="resumo", nullable=false)
+    private String resumo;
+
+    @Column(name="capa", nullable=false)
     private String capa;
-    private String modo_jogo;
+
+    @Column(name="modoJogo", nullable=false)
+    private String modoJogo;
+
+    @Column(name="dataLancamento", nullable=false)
     private LocalDate dataLancamento;
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getGenero() {
-        return genero;
-    }
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-    public String getCapa() {
-        return capa;
-    }
-    public void setCapa(String capa) {
-        this.capa = capa;
-    }
-    public String getModo_jogo() {
-        return modo_jogo;
-    }
-    public void setModo_jogo(String modo_jogo) {
-        this.modo_jogo = modo_jogo;
-    }
-    public LocalDate getDataLancamento() {
-        return dataLancamento;
-    }
-    public void setDataLancamento(LocalDate dataLancamento) {
-        this.dataLancamento = dataLancamento;
-    }
-   
+
+    @ManyToMany
+    @JoinTable(
+        name = "jogo_genero",
+        joinColumns = @JoinColumn(name = "jogo_id"),
+        inverseJoinColumns = @JoinColumn(name = "genero_id")
+    )
+    private List<Genero> generos;
+
 }
