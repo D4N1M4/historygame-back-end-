@@ -37,4 +37,3 @@ public class Usuario {
     private Set<Jogo> favoritos = new HashSet<>();
 
 }
-
