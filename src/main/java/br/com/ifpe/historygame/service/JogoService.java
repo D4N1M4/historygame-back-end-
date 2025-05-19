@@ -42,6 +42,11 @@ public class JogoService {
                          .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
     }
 
+    public List<JogoDTO> buscarPorNome(String termoBusca) {
+        List<Jogo> jogos = repository.findByNomeContainingIgnoreCase(termoBusca);
+        return jogos.stream().map(mapper::toDTO).toList();
+    }
+
 public JogoDTO salvar(JogoDTO dto) {
     // Converte o DTO para entidade
     Jogo jogo = mapper.toEntity(dto);
