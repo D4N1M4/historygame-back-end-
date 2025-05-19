@@ -16,4 +16,6 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
     @Query("SELECT j FROM Jogo j JOIN j.generos g WHERE LOWER(g.nome) = LOWER(:nomeGenero)")
     List<Jogo> findByGenerosNomeIgnoreCase(@Param("nomeGenero") String nomeGenero);
 
+    List<Jogo> findByNomeContainingIgnoreCase(String nome);
+
 }

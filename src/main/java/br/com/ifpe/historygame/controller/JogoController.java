@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpe.historygame.dto.JogoDTO;
@@ -31,6 +32,11 @@ public class JogoController {
     @GetMapping("/{id}")
     public ResponseEntity<JogoDTO> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<JogoDTO>> buscarPorNome(@RequestParam String busca) {
+        return ResponseEntity.ok(service.buscarPorNome(busca));
     }
 
     @PostMapping
