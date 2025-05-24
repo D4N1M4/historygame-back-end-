@@ -99,16 +99,29 @@ export default {
       }
     };
 
-    const registerWithGoogle = async () => {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-        console.log(result.user);
-        router.push('/perfil');
-      }catch(error) {
-        console.log(error.code);
-        alert(error.message);
-      }
-    }
+const registerWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+
+    // Envia os dados pro backend
+    await fetch("http://localhost:8080/api/usuarios/registrar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid: user.uid,
+        nome: user.displayName || "Usuário",
+        email: user.email
+      })
+    });
+
+    router.push('/perfil');
+  } catch (error) {
+    console.log(error.code);
+    alert("Erro ao registrar com Google: " + error.message);
+  }
+};
+
 
     return {
       username,
