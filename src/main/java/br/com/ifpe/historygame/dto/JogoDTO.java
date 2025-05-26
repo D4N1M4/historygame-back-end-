@@ -1,12 +1,11 @@
 package br.com.ifpe.historygame.dto;
+
 import java.time.LocalDate;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class JogoDTO {
     private Long id;
     private String nome;
@@ -16,5 +15,8 @@ public class JogoDTO {
     private LocalDate dataLancamento;
     private List<GeneroDTO> generos;
 }
+
+
+
 
 

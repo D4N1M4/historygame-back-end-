@@ -117,4 +117,13 @@ public JogoDTO atualizar(Long id, JogoDTO dto) {
                 .toList();
     }
 
+     public List<JogoDTO> listarMaisAcessados() {
+        return repository.findJogosOrderByAcessosDesc().stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    
+
 }

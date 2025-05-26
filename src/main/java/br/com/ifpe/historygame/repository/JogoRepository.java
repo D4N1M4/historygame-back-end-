@@ -18,4 +18,14 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
 
     List<Jogo> findByNomeContainingIgnoreCase(String nome);
 
+     @Query("""
+        SELECT j
+        FROM Jogo j
+        LEFT JOIN j.acessos a
+        GROUP BY j
+        ORDER BY COUNT(a) DESC
+    """)
+    List<Jogo> findJogosOrderByAcessosDesc();
 }
+    
+

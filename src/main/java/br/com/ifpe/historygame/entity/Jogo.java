@@ -40,4 +40,8 @@ public class Jogo {
     )
     private List<Genero> generos;
 
+    @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Acesso> acessos;
+
+
 }
