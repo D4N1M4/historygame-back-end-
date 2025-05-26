@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.historygame.entity.Jogo;
+import br.com.ifpe.historygame.dto.JogadoJogoDTO;
 import br.com.ifpe.historygame.service.JogadoService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,8 +34,8 @@ public class JogadoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Jogo>> listarJogados(@PathVariable String uid) {
-        List<Jogo> jogados = jogadoService.listarJogados(uid);
+    public ResponseEntity<List<JogadoJogoDTO>> listarJogados(@PathVariable String uid) {
+        List<JogadoJogoDTO> jogados = jogadoService.listarJogados(uid);
         return ResponseEntity.ok(jogados);
     }
 }

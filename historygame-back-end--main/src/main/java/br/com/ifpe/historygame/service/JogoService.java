@@ -41,11 +41,19 @@ public class JogoService {
     }
 
     // Buscar um jogo por ID
-    public JogoDTO buscarPorId(Long id) {
-        return jogoRepository.findById(id)
-                         .map(mapper::toDTO)
-                         .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
-    }
+public JogoDTO buscarPorId(Long id) {
+    Jogo jogo = jogoRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+
+    JogoDTO dto = mapper.toDTO(jogo);
+
+    // Adicionando as contagens ao DTO
+    dto.setFavoritados(favoritoRepository.countByJogoId(id));
+    dto.setJogados(jogadoRepository.countByJogoId(id));
+    dto.setDesejados(desejadoRepository.countByJogoId(id));
+
+    return dto;
+}
 
     public List<JogoDTO> buscarPorNome(String termoBusca) {
         List<Jogo> jogos = jogoRepository.findByNomeContainingIgnoreCase(termoBusca);

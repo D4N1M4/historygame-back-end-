@@ -10,4 +10,5 @@ import br.com.ifpe.historygame.entity.Jogado;
 public interface JogadoRepository extends JpaRepository<Jogado, Long> {
     List<Jogado> findByUsuarioUid(String uid);
     Optional<Jogado> findByUsuarioUidAndJogoId(String uid, Long jogoId);
+    int countByJogoId(Long jogoId);
 }

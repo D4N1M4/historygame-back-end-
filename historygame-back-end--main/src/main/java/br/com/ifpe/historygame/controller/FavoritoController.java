@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.historygame.entity.Jogo;
+import br.com.ifpe.historygame.dto.FavoritoJogoDTO;
 import br.com.ifpe.historygame.service.FavoritoService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,8 +34,9 @@ public class FavoritoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Jogo>> listarFavoritos(@PathVariable String uid) {
-        List<Jogo> favoritos = favoritoService.listarFavoritos(uid);
+    public ResponseEntity<List<FavoritoJogoDTO>> listarFavoritos(@PathVariable String uid) {
+        List<FavoritoJogoDTO> favoritos = favoritoService.listarFavoritos(uid);
         return ResponseEntity.ok(favoritos);
     }
+
 }

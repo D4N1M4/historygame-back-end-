@@ -17,6 +17,9 @@ public class JogoDTO {
     private LocalDate dataLancamento;
     private List<GeneroDTO> generos;
 
+    private Integer favoritados;
+    private Integer jogados;
+    private Integer desejados;
 }
 
 

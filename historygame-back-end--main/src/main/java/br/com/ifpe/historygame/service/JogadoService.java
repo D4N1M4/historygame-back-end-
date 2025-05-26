@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.historygame.dto.JogadoJogoDTO;
 import br.com.ifpe.historygame.entity.Jogado;
 import br.com.ifpe.historygame.entity.Jogo;
 import br.com.ifpe.historygame.entity.Usuario;
@@ -36,9 +37,9 @@ public class JogadoService {
             .ifPresent(jogadoRepository::delete);
     }
 
-    public List<Jogo> listarJogados(String uid) {
+    public List<JogadoJogoDTO> listarJogados(String uid) {
         return jogadoRepository.findByUsuarioUid(uid).stream()
-            .map(Jogado::getJogo)
+            .map(jog -> new JogadoJogoDTO(jog.getJogo()))
             .toList();
     }
 }

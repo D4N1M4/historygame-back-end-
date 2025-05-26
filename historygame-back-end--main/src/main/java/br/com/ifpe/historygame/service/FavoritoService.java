@@ -1,9 +1,12 @@
 package br.com.ifpe.historygame.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.historygame.dto.FavoritoJogoDTO;
 import br.com.ifpe.historygame.entity.Favorito;
 import br.com.ifpe.historygame.entity.Jogo;
 import br.com.ifpe.historygame.entity.Usuario;
@@ -36,9 +39,25 @@ public class FavoritoService {
             .ifPresent(favoritoRepository::delete);
     }
 
-    public List<Jogo> listarFavoritos(String uid) {
+    public List<FavoritoJogoDTO> listarFavoritos(String uid) {
         return favoritoRepository.findByUsuarioUid(uid).stream()
-            .map(Favorito::getJogo)
+            .map(fav -> new FavoritoJogoDTO(fav.getJogo(), null))
             .toList();
     }
+
+    public List<FavoritoJogoDTO> buscarMaisFavoritados() {
+    List<Favorito> todosFavoritos = favoritoRepository.findAll();
+
+    Map<Jogo, Long> contagemPorJogo = todosFavoritos.stream()
+        .collect(Collectors.groupingBy(Favorito::getJogo, Collectors.counting()));
+
+    return contagemPorJogo.entrySet().stream()
+        .sorted((e1, e2) -> Long.compare(e2.getValue(), e1.getValue())) // ordem decrescente
+        .map(entry -> {
+            Jogo jogo = entry.getKey();
+            Long total = entry.getValue();
+            return new FavoritoJogoDTO(jogo, total); // precisa de construtor com totalFavoritos
+        })
+        .toList();
+}
 }

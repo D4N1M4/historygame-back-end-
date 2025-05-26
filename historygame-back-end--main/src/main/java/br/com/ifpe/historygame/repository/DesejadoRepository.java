@@ -10,4 +10,5 @@ import br.com.ifpe.historygame.entity.Desejado;
 public interface DesejadoRepository extends JpaRepository<Desejado, Long> {
     List<Desejado> findByUsuarioUid(String uid);
     Optional<Desejado> findByUsuarioUidAndJogoId(String uid, Long jogoId);
+    int countByJogoId(Long jogoId);
 }

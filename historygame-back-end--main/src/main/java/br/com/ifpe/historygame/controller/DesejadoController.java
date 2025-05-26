@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.historygame.entity.Jogo;
+import br.com.ifpe.historygame.dto.DesejadoJogoDTO;
 import br.com.ifpe.historygame.service.DesejadoService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,8 +34,8 @@ public class DesejadoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Jogo>> listarDesejados(@PathVariable String uid) {
-        List<Jogo> desejados = desejadoService.listarDesejados(uid);
+    public ResponseEntity<List<DesejadoJogoDTO>> listarDesejados(@PathVariable String uid) {
+        List<DesejadoJogoDTO> desejados = desejadoService.listarDesejados(uid);
         return ResponseEntity.ok(desejados);
     }
 }

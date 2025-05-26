@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.historygame.dto.DesejadoJogoDTO;
 import br.com.ifpe.historygame.entity.Desejado;
 import br.com.ifpe.historygame.entity.Jogo;
 import br.com.ifpe.historygame.entity.Usuario;
@@ -36,9 +37,9 @@ public class DesejadoService {
             .ifPresent(desejadoRepository::delete);
     }
 
-    public List<Jogo> listarDesejados(String uid) {
+    public List<DesejadoJogoDTO> listarDesejados(String uid) {
         return desejadoRepository.findByUsuarioUid(uid).stream()
-            .map(Desejado::getJogo)
+            .map(fav -> new DesejadoJogoDTO(fav.getJogo()))
             .toList();
     }
 }
